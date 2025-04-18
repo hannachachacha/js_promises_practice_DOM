@@ -54,18 +54,23 @@ secondPromise.then(() => {
 let leftClicked = false;
 let rightClicked = false;
 
+let thirdSettle = false;
+
 const thirdPromise = new Promise((resolve, reject) => {
   document.addEventListener('mousedown', (e) => {
-    if (e.button === 0) {
-      leftClicked = true;
-    }
+    if (!thirdSettle) {
+      if (e.button === 0) {
+        leftClicked = true;
+      }
 
-    if (e.button === 2) {
-      rightClicked = true;
-    }
+      if (e.button === 2) {
+        rightClicked = true;
+      }
 
-    if (leftClicked && rightClicked) {
-      resolve();
+      if (leftClicked && rightClicked) {
+        thirdSettle = true;
+        resolve();
+      }
     }
   });
 });
